@@ -35,8 +35,8 @@ services:
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
-      - ./Onath.Web/DbScripts:/scripts
-      - ./Onath.Web/DbScripts/migration.sql:/docker-entrypoint-initdb.d/migration.sql
+      - ./DbScripts:/scripts
+      - ./DbScripts/migration.sql:/docker-entrypoint-initdb.d/migration.sql
     ports:
       - "5449:5432"
     networks:
