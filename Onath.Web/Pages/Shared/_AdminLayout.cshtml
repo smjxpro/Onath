@@ -1,0 +1,139 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Onath.Web.Models
+@inject SignInManager<ApplicationUser> _signInManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - Onath</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/Onath.Web.styles.css" asp-append-version="true"/>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">Onath</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Musics/Index">Musics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Wallpapers/Index">Wallpapers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Games/Index">Games</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Apps/Index">Apps</a>
+                    </li>
+
+                </ul>
+                <ul class="navbar-nav me-auto">
+                  @if (_signInManager.IsSignedIn(User))
+                  {
+                      <li class="nav-item">
+                          <a class="nav-link text-dark">@User.Identity.Name</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Logout</a>
+                      </li>
+                  }
+                  else
+                  {
+                      <li class="nav-item">
+                          <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link text-dark" asp-area="" asp-page="/Account/Register">Register</a>
+                      </li>
+                  }
+
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+
+    @* <main role="main" class="pb-3"> *@
+    @*     @RenderBody() *@
+    @* *@
+    @* </main> *@
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-auto bg-light sticky-top">
+                <div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
+                    <a asp-page="/Admin/Index" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+                        <i class="bi-house fs-1"></i>
+                    </a>
+                    <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center justify-content-between w-100 px-3 align-items-center">
+                        <li>
+                            <a asp-page="/Admin/Apps/Index" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
+                                <i class="bi-app-indicator fs-1"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/Admin/Games/Index" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
+                                <i class="bi-joystick fs-1"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/Admin/Musics/Index" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
+                                <i class="bi-file-music fs-1"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-page="/Admin/Wallpapers/Index" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+                                <i class="bi-image-alt fs-1"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    @* <div class="dropdown"> *@
+                    @*     <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false"> *@
+                    @*         <i class="bi-person-circle h2"></i> *@
+                    @*     </a> *@
+                    @*     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3"> *@
+                    @*         <li><a class="dropdown-item" href="#">New project...</a></li> *@
+                    @*         <li><a class="dropdown-item" href="#">Settings</a></li> *@
+                    @*         <li><a class="dropdown-item" href="#">Profile</a></li> *@
+                    @*     </ul> *@
+                    @* </div> *@
+                </div>
+            </div>
+            <div class="col-sm p-3 min-vh-100">
+                <!-- content -->
+                @RenderBody()
+                </div>
+        </div>
+    </div>
+
+</div>
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2021 - Onath
+    </div>
+</footer>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

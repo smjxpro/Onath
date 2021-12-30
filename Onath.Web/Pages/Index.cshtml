@@ -1,0 +1,102 @@
+@page
+@model Onath.Web.Pages.Index
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+
+<div class="container my-4">
+    <h3>Musics</h3>
+
+    <div class="row">
+        @foreach (var music in Model.Musics)
+        {
+            <div class="col">
+                @music.Title
+            </div>
+        }
+
+    </div>
+</div>
+
+<div class="container my-4">
+    <h3>Wallpapers</h3>
+
+    <div class="row">
+        @foreach (var wallpaper in Model.Wallpapers)
+        {
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="@($"{Request.Scheme}://{Request.Host}{wallpaper.Url}")" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <a asp-page="./Details" asp-route-id="@wallpaper.Id"><h5 class="card-title">@wallpaper.Title</h5></a>  
+                        <p class="card-text">@(wallpaper.Description.Length>50?wallpaper.Description.Substring(50) +"...": wallpaper.Description)</p>
+                        <a href="@($"{Request.Scheme}://{Request.Host}{wallpaper.Url}")" class="btn btn-primary">Download</a>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<div class="container my-4">
+    <h3>Games</h3>
+
+    <div class="row">
+        @foreach (var game in Model.Games)
+        {
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="@($"{Request.Scheme}://{Request.Host}{game.Url}")" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <a asp-page="./Details" asp-route-id="@game.Id">
+                            <h5 class="card-title">@game.Title</h5>
+                        </a>
+                        <p>
+                            <span class="fw-bold">Genre: </span>@game.Genre
+                        </p>
+
+                        <p class="card-text">@(game.Description.Length > 50 ? game.Description.Substring(50) + "..." : game.Description)</p>
+                        <a href="@($"{Request.Scheme}://{Request.Host}{game.Url}")" class="btn btn-primary">Download</a>
+
+                    </div>
+                </div>
+            </div>
+
+        }
+
+    </div>
+</div>
+
+<div class="container my-4">
+    <h3>Apps</h3>
+
+    <div class="row">
+        @foreach (var app in Model.Apps)
+        {
+                        <div class="col">
+                            <div class="card" style="width: 18rem;">
+                                <img src="@($"{Request.Scheme}://{Request.Host}{app.CoverUrl}")" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <a asp-page="./Details" asp-route-id="@app.Id">
+                                        <h5 class="card-title">@app.Title</h5>
+                                    </a>
+                                    <p>
+                                        <span class="fw-bold">Genre: </span>@app.Category
+                                    </p>
+            
+                                    <p class="card-text">@(app.Description.Length > 50 ? app.Description.Substring(50) + "..." : app.Description)</p>
+                                    <a href="@($"{Request.Scheme}://{Request.Host}{app.Url}")" class="btn btn-primary">Download</a>
+            
+                                </div>
+                            </div>
+                        </div>
+
+        }
+
+    </div>
+</div>
+

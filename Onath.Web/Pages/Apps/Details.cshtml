@@ -1,0 +1,19 @@
+@page
+@model Onath.Web.Pages.Apps.DetailsModel
+@{
+    ViewData["Title"] = Model.App.Title;
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.App.Title</h1>
+
+<div class="card">
+    <img src="@($"{Request.Scheme}://{Request.Host}{Model.App.CoverUrl}")" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">@Model.App.Title</h5>
+        <p><span class="fw-bold">Genre: </span>@Model.App.Category</p>
+        <p class="card-text">@Model.App.Description</p>
+        <a href="@($"{Request.Scheme}://{Request.Host}{Model.App.Url}")" class="btn btn-primary">Download</a>
+
+    </div>
+</div>

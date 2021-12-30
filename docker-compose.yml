@@ -1,0 +1,56 @@
+version: '3.3'
+
+services:
+  web:
+    container_name: onath
+    build:
+      context: .
+      dockerfile: ./Onath.Web/Dockerfile
+    ports:
+      - "8099:80"
+    depends_on:
+      - postgres
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      ASPNETCORE_BASE_URL: ${ASPNETCORE_BASE_URL:-"https://onath.prohelika.net"}
+      DB_CONNECTION_STRING: "host=${DB_HOST:-onath_postgres};port=${DB_PORT:-5432};dat\
+        abase=${DB_DATABASE:-onath};username=${DB_USERNAME:-onath};password=${DB_\
+        PASSWORD:-onath};"
+    volumes:
+      - uploads:/app/wwwroot/uploads
+      - musics:/app/wwwroot/uploads/musics
+      - wallpapers:/app/wwwroot/uploads/wallpapers
+      - games:/app/wwwroot/uploads/games
+      - apps:/app/wwwroot/uploads/apps
+    networks:
+      - onath
+    restart: unless-stopped
+
+  postgres:
+    container_name: onath_postgres
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${DB_USERNAME:-onath}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-onath}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+      - ./Onath.Web/DbScripts:/scripts
+      - ./Onath.Web/DbScripts/migration.sql:/docker-entrypoint-initdb.d/migration.sql
+    ports:
+      - "5449:5432"
+    networks:
+      - onath
+    restart: unless-stopped
+
+networks:
+  onath:
+    driver: bridge
+
+volumes:
+  postgres: null
+  uploads: null
+  musics: null
+  wallpapers: null
+  games: null
+  apps: null

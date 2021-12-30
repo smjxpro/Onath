@@ -1,0 +1,38 @@
+@page
+@model Onath.Web.Pages.Games.IndexModel
+
+@{
+    ViewData["Title"] = "Games";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Games</h1>
+
+
+<div class="container my-4">
+    <div class="row">
+        @for (int i = 0; i < Model.Game.Count; i++)
+        {
+            var item = Model.Game[i];
+
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="@($"{Request.Scheme}://{Request.Host}{item.Url}")" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <a asp-page="./Details" asp-route-id="@item.Id">
+                            <h5 class="card-title">@item.Title</h5>
+                        </a>
+                        <p>
+                            <span class="fw-bold">Genre: </span>@item.Genre
+                        </p>
+
+                        <p class="card-text">@(item.Description.Length > 50 ? item.Description.Substring(50) + "..." : item.Description)</p>
+                        <a href="@($"{Request.Scheme}://{Request.Host}{item.Url}")" class="btn btn-primary">Download</a>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

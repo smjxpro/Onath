@@ -1,0 +1,55 @@
+@page
+@model Onath.Web.Pages.Admin.Apps.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>App</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CreateAppVM.Title" class="control-label"></label>
+                <input asp-for="CreateAppVM.Title" class="form-control" />
+                <span asp-validation-for="CreateAppVM.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateAppVM.Description" class="control-label"></label>
+                <input asp-for="CreateAppVM.Description" class="form-control" />
+                <span asp-validation-for="CreateAppVM.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateAppVM.Category" class="control-label"></label>
+                <input asp-for="CreateAppVM.Category" class="form-control" />
+                <span asp-validation-for="CreateAppVM.Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateAppVM.CoverPhoto" class="control-label"></label>
+                <input asp-for="CreateAppVM.CoverPhoto" class="form-control" />
+                <span asp-validation-for="CreateAppVM.CoverPhoto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateAppVM.File" class="control-label"></label>
+                <input asp-for="CreateAppVM.File" class="form-control" />
+                <span asp-validation-for="CreateAppVM.File" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,50 @@
+@page
+@model Onath.Web.Pages.Account.Login
+
+@{
+    ViewData["Title"] = "Login";
+
+    Layout = "Shared/_Layout";
+}
+
+
+<h1>Login</h1>
+
+<hr/>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LoginVm.Email" class="control-label"></label>
+                <input asp-for="LoginVm.Email" class="form-control"/>
+                <span asp-validation-for="LoginVm.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoginVm.Password" class="control-label"></label>
+                <input asp-for="LoginVm.Password" class="form-control"/>
+                <span asp-validation-for="LoginVm.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoginVm.RememberMe" class="control-label"></label>
+                <input asp-for="LoginVm.RememberMe" />
+                <span asp-validation-for="LoginVm.RememberMe" class="text-danger"></span>
+            </div>
+          
+
+         
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Index">Back to Home</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
